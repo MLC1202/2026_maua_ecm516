@@ -62,18 +62,53 @@
 // console.log(2 === '2') //false, compara o valor e o tipo
 
 //colecoes
-v1 = [10]
-console.log(v1.length)
-v1[0] = 2
-console.log(v1.length)
-v1[1] = "abc"
-console.log(v1.length)
-v1[10] = "Joao"
-console.log(v1.length)
-console.log(v1)
-for (let i = 0; i < v1.length; i++){
-    console.log(v1[i])
-}
+// v1 = [10]
+// console.log(v1.length)
+// v1[0] = 2
+// console.log(v1.length)
+// v1[1] = "abc"
+// console.log(v1.length)
+// v1[10] = "Joao"
+// console.log(v1.length)
+// console.log(v1)
+// for (let i = 0; i < v1.length; i++){
+//     console.log(v1[i])
+// }
 
-//console.log("hello, world!")
+//funcoes
+//function e arrow function
+// function hello(){
+//     console.log("hello, world!")
+// }
+// hello()
+// function hello (nome){
+//     console.log(`hello, ${nome}!`)
+// }
+// hello("pedro")
+
+// function soma(a, b){
+//     return a + b
+// }
+// const resultado = soma(2, 3)
+// console.log(resultado)
+
+// const dobro = function (n){
+//     return 2 * n
+// }
+// console.log(dobro(4))
+
+// const triplo = function(n = 5){
+//     return 3 * n
+// }
+// console.log(triplo())
+// console.log(triplo(10))
+
+// const falarOi = () => {console.log("hello")}
+// falarOi()
+
+// const ola = nome => {console.log(`hello, ${nome}!`)}
+// ola('pedro')
+
+// const somar = (a, b) => a + b // ou {return a + b} ou a + b
+// console.log(somar(2, 3))
 
