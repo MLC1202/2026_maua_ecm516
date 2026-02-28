@@ -61,5 +61,19 @@
 // console.log(2 == '2') //true, compara o valor
 // console.log(2 === '2') //false, compara o valor e o tipo
 
+//colecoes
+v1 = [10]
+console.log(v1.length)
+v1[0] = 2
+console.log(v1.length)
+v1[1] = "abc"
+console.log(v1.length)
+v1[10] = "Joao"
+console.log(v1.length)
+console.log(v1)
+for (let i = 0; i < v1.length; i++){
+    console.log(v1[i])
+}
+
 //console.log("hello, world!")
 
