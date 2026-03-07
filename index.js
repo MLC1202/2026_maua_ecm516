@@ -112,6 +112,7 @@
 // const somar = (a, b) => a + b // ou {return a + b} ou a + b
 // console.log(somar(2, 3))
 
+<<<<<<< HEAD
 //Listas/ vetores/ arrays/ arranjos
 const nomes = ["Ana Maria", "Rodrigo", "Antonio"]
 // const apenasComA = nomes.filter(nome => nome.startsWith('A') )
@@ -126,3 +127,5 @@ const nomes = ["Ana Maria", "Rodrigo", "Antonio"]
 // const res = numeros.reduce((ac, v) => ac + v)
 // console.log(res)
 
+=======
+>>>>>>> a3796ee7fe4ea645a32745b623e9db7e1671501b
