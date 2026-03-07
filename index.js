@@ -112,9 +112,8 @@
 // const somar = (a, b) => a + b // ou {return a + b} ou a + b
 // console.log(somar(2, 3))
 
-<<<<<<< HEAD
 //Listas/ vetores/ arrays/ arranjos
-const nomes = ["Ana Maria", "Rodrigo", "Antonio"]
+// const nomes = ["Ana Maria", "Rodrigo", "Antonio"]
 // const apenasComA = nomes.filter(nome => nome.startsWith('A') )
 // console.log(apenasComA)
 
@@ -127,5 +126,60 @@ const nomes = ["Ana Maria", "Rodrigo", "Antonio"]
 // const res = numeros.reduce((ac, v) => ac + v)
 // console.log(res)
 
-=======
->>>>>>> a3796ee7fe4ea645a32745b623e9db7e1671501b
+//closure
+
+// let umaFuncao = function(){
+//     console.log(" FUi armazenada em uma variável")
+//     return () => 'oi'
+// }
+// umaFuncao()
+// function f(funcao){
+//     console.log(funcao())
+// }
+// f(umaFuncao())
+
+// function f (funcao){
+//     funcao()
+// }
+
+// function g(){
+//     function outraFuncao(){
+//         console.log('Fui criada por g')
+//         return () => "A"
+
+//     }
+//     return outraFuncao
+// }
+// console.log(g()())
+
+
+// const res = g()
+// f(res)
+// console.log(res())
+
+// function f(idade){
+//     let nome = 'Joao'
+//     function g(){
+//         console.log(`Meu nome é ${nome} e tenho ${idade} anos`)
+//     }
+//     return g
+
+// }
+// const res = f(18)
+// res()
+
+// const eAgora = () => {
+// let cont = 1
+// const f1 = () => console.log(cont)
+// cont++
+// const f2 = () => console.log(cont)
+// cont++
+// return {f1, f2}
+// }
+// const res = eAgora()
+// res.f1()
+// res.f2()
+
+
+
+
