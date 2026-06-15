@@ -1,381 +1,554 @@
-// // Declarando constantes
-// const nome = "pedro"
-// console.log(nome)
+// async/await
+function fatorial(n){
+    if (n < 0) return Promise.reject("O valor não pode ser negativo")
+    let res = 1
+    for(let i = 2; i <= n; i++) res *= i
+    return Promise.resolve(res)
+}
 
-// const idade = 17
-// console.log(idade)
+fatorial(5)
+    .then((res) => {
+        console.log('then', res)
+    })
+    .catch((err) => {
+        console.log('catch', err)
+    })
+fatorial(-5)
+    .then((res) => {
+        console.log(res)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
 
-// console.log(typeof(idade))
+async function chamadaComAwait(){
+    try{
+        const f1 = await fatorial(5)
+        console.log(f1)
+        const f2 = await fatorial(-5)
+        console.log(f2)
+    } catch(err) {
+        console.log(err)
+    }
+}
 
-// // Declarando variaveis
-// let a = 2
-// console.log(a)
-// let passouDeAno = true
-// console.log(passouDeAno)
-// a = 3
-// console.log(a)
-// let b
-// console.log(b)
-// b = 1.5
-// console.log(b)
+chamadaComAwait()
 
-// // var tbm existe (NAO USAR!)
-// var c = 2
-// c = 3
-// console.log(c)
-
-// var linguagem = "javascript"
-// console.log('Aprendendo ' + linguagem)
-
-// linguagem = "java" //pode colocar o var dnv ou nao
-// console.log(`Aprendendo ${linguagem} agora!`) //interpolacao
-
-// var idade = 18
-// console.log(`Oi, ${nome}`) 
-// if (idade >= 18){
-//     var nome = 'Joao'
-//     console.log(`tchau, ${nome}`)
+//não funciona
+// try {
+//     fatorial(-5)
+//         .then((res) => {
+//             console.log(res)
+//         })
+// } catch(err){
+//     console.log(err)
 // }
 
-// let a = 2
-// console.log(a)
-// console.log(typeof(a))
-// a = "dois"
-// console.log(a)
-// console.log(typeof(a))
 
 
-// coercao implicita e explicita
-// const n1 = 2
-// const n2 = '3'
+// // // promises
 
-// const n3 = n1 + n2
-// console.log(n3) //coercao implicita
-
-// const n4 = n1 + Number(n2)
-// console.log(n4) //coercao explicita
-
-//operadores de comparacao por igualdade: == e ===
-// console.log(2 == 2) //true, compara o valor
-// console.log(2 === 2) //true, compara o valor e o tipo
-// console.log(2 == '2') //true, compara o valor
-// console.log(2 === '2') //false, compara o valor e o tipo
-
-//colecoes
-// v1 = [10]
-// console.log(v1.length)
-// v1[0] = 2
-// console.log(v1.length)
-// v1[1] = "abc"
-// console.log(v1.length)
-// v1[10] = "Joao"
-// console.log(v1.length)
-// console.log(v1)
-// for (let i = 0; i < v1.length; i++){
-//     console.log(v1[i])
+// function calculoRapidinho(numero){
+//     return numero >= 0
+//         ? Promise.resolve(numero*(numero+1)/2)
+//         : Promise.reject("numero deve ser maior ou igual a zero")
 // }
 
-//funcoes
-//function e arrow function
-// function hello(){
-//     console.log("hello, world!")
-// }
-// hello()
-// function hello (nome){
-//     console.log(`hello, ${nome}!`)
-// }
-// hello("pedro")
-
-// function soma(a, b){
-//     return a + b
-// }
-// const resultado = soma(2, 3)
-// console.log(resultado)
-
-// const dobro = function (n){
-//     return 2 * n
-// }
-// console.log(dobro(4))
-
-// const triplo = function(n = 5){
-//     return 3 * n
-// }
-// console.log(triplo())
-// console.log(triplo(10))
-
-// const falarOi = () => {console.log("hello")}
-// falarOi()
-
-// const ola = nome => {console.log(`hello, ${nome}!`)}
-// ola('pedro')
-
-// const somar = (a, b) => a + b // ou {return a + b} ou a + b
-// console.log(somar(2, 3))
-
-//Listas/ vetores/ arrays/ arranjos
-// const nomes = ["Ana Maria", "Rodrigo", "Antonio"]
-// const apenasComA = nomes.filter(nome => nome.startsWith('A') )
-// console.log(apenasComA)
-
-// const iniciais = nomes.map(function(nome){return nome.charAt(0)})
-// 
-// const res = nomes.every(n => n.startsWith('A'))
-// console.log(res)
-
-// const numeros = [1, 2, 3, 4, 5]
-// const res = numeros.reduce((ac, v) => ac + v)
-// console.log(res)
-
-//closure
-
-// let umaFuncao = function(){
-//     console.log(" FUi armazenada em uma variável")
-//     return () => 'oi'
-// }
-// umaFuncao()
-// function f(funcao){
-//     console.log(funcao())
-// }
-// f(umaFuncao())
-
-// function f (funcao){
-//     funcao()
-// }
-
-// function g(){
-//     function outraFuncao(){
-//         console.log('Fui criada por g')
-//         return () => "A"
-
-//     }
-//     return outraFuncao
-// }
-// console.log(g()())
-
-
-// const res = g()
-// f(res)
-// console.log(res())
-
-// function f(idade){
-//     let nome = 'Joao'
-//     function g(){
-//         console.log(`Meu nome é ${nome} e tenho ${idade} anos`)
-//     }
-//     return g
-
-// }
-// const res = f(18)
-// res()
-
-// const eAgora = () => {
-// let cont = 1
-// const f1 = () => console.log(cont)
-// cont++
-// const f2 = () => console.log(cont)
-// cont++
-// return {f1, f2}
-// }
-// const res = eAgora()
-// res.f1()
-// res.f2()
-
-//JSON: JavaScript Object Notation
-//Uma pessoa que se chama joao e tem 17 anos
-// let pessoa = {
-//     nome: 'Joao',
-//     idade: 17
-// }
-
-// console.log(pessoa.nome)
-// console.log(pessoa['idade'])
-
-//Uma pessoa chamada maria, tem 21 anos e mora na rua B, numero 50
-// let pessoa = {
-//     nome: 'Maria',
-//     idade: 21,
-//     endereco: {
-//         rua: 'B',
-//         numero: 50
-//     }
-// }
-// console.log(pessoa.nome)
-// console.log(pessoa['idade'])
-// console.log(pessoa.endereco.rua)
-// console.log(pessoa.endereco['numero'])
-//promises
-//1 + 2 + 3 + ... + n
-//demorando...
-// const calculoDemorado = (n) => {
-//     let cont = 0
-//     for(let i = 1; i <= n; i++)
-//         cont += i
-//     return cont
-// }
-// const res = calculoDemorado(1000)
-// console.log(res)
-
-
-//CPU Bound: predominantemente caracterizada por ciclos de cpu
-//IO Bound: predominantemente caracterizada por operações de entrada e saída
-// const fs = require('fs')
-// const nomeArquivo = 'arquivo.txt'
-// //função callback
-// const exibirConteudo = (erro, conteudo) => {
-//     console.log("A")
-//     if(erro){
-//         console.log(`Deu erro: ${erro}`)
-//     }
-//     else{
-//         console.log(`Conteúdo: ${conteudo}`)
-//         const dobro = Number(conteudo.toString()) * 2
-//         //mais uma função callback
-//         const finalizar = (erro) => {
-//             console.log(erro ? "Deu erro ao escrever o dobro" : "Ok, escreveu o dobro")
-//             console.log('C')
-//             const exibirDobro = (erro, conteudo) => {
-//                 console.log("E")
-//                 console.log(erro ? "Deu erro lendo o dobro": `Dobro: ${conteudo.toString()}`)
-//             }
-//             fs.readFile('dobro.txt', exibirDobro)
-//             console.log('F')
-//         }
-//         fs.writeFile('dobro.txt', dobro.toString(), finalizar)
-//         console.log('D')
-//     }
-// }
-// fs.readFile(nomeArquivo, exibirConteudo)
-// console.log("B")
-// function demorada(tempo){
-//     const dataAtualMaisTempo = new Date().getTime() + tempo
-//     while(new Date().getTime() <= dataAtualMaisTempo);
-//     const d = 8 + 2 * 6
-//     console.log(`Demorada com tempo: ${tempo}`)
-//     return d
-// }
-// setTimeout(() => {
-//     demorada(5000)
-// }, 5000)
-
-// setTimeout(() => {
-//     demorada(1000)
-// }, 1000)
-
-// console.log('Fim do script principal')
-
-
-
-// setTimeout(() => {
-//     console.log("Agendada pela setTimeout")
-// }, 0)
-// const dataAtualMais5Segundos = new Date().getTime() + 5000
-// while(new Date().getTime() <= dataAtualMais5Segundos);
-// console.log("Terminando o script principal...")
-
-// const a = 2 + 3
-// const b = 6 * 1
-
-// setTimeout(() => {
-//     const d = demorada()
-//     console.log(`d: ${d}`)
-// }, 500)
-
-// const e = a + b * 2
-// console.log(`e: ${e}`)
-// const a = 5 + 6
-// const b = 9 * 4
-// console.log(a + b)
-
-// console.log('Eu primeiro...')
-// console.log('Agora eu...')
-// console.log("Sempre serei a última...:(")
-
-
-//Uma calculadora realiza as quatro operações fundamentais
-//soma: representada por uma arrow function que faz return
-//subtração: representa por uma arrow function sem return
-//multiplicação: function regular
-//divisão: você escolhe
-//todas elas operam com dois operandos
-
-// const calculadora = {
-//     operacoes: {
-//         soma: (a, b) => {return a + b},
-//         subtracao: (a, b) => a - b,
-//         multiplicacao: function (a, b){
-//             return a * b
-//         },
-//         divisao: (a, b) => a / b    
-//     }
-// }
-// console.log(calculadora.operacoes.soma(2, 3))
-// console.log(calculadora['operacoes']['subtracao'](4, 5))
-
-
-//Uma concessionária tem nome, CNPJ e endereço (logradouro, numero e bairro). Ela também seu estoque de veículos. A quantidade de veículos é arbitrária. A qualquer instante, ela pode ter 2 ou 5 ou 17 veículos. Cada veículo modelo, marca e placa.
-// const concessionaria = {
-//     cnpj: '000000000/0001-12',
-//     nome: 'Nome qualquer',
-//     endereco: {
-//         logradouro: 'Rua A',
-//         numero: 12,
-//         bairro: {
-//             nome: "Vija J",
-//         }
-//     },
-//     estoque: [
-//         {
-//             modelo: "Ka",
-//             marca: "Ford",
-//             placa: "ABC-1234"
-//         },
-//         {
-//             modelo: "Fusca",
-//             marca: "VW",
-//             placa: "ADD-4455"
-//         },
-//     ]
-// }
-// console.log(concessionaria.estoque[0].modelo)
-// console.log(concessionaria['estoque'][1]['modelo'])
-
-//promise
-//1 + 2 + 3 + ... + n
-// const calculoDemorado =(n) => {
-//     let ac =0
-//     for(let i=1; i <= n; i++)
-//         ac += i
-//     return ac
-// }
-
-// const calculoDemorado = (n) => {
-//     return new Promise((resolve, reject) => {
-//         // se n for negativo, propagar um erro
-//         //caso contrario, continuar como ja era
-//         if (n>0){
-//             let ac = 0
-//             for(let i = 1; i <= n; i++)
-//                 ac += i
-//             resolve(ac)
-//         }
-//         else{
-//             reject("n deve ser positivo")
-//         }
-
-
+// calculoRapidinho(10)
+//     .then((res) => {
+//         console.log(res)
+//         console.log('10')
 //     })
-// }
-// const minhaPromise = calculoDemorado(-2)
-// //then/catch
-// minhaPromise
-// .then((resultado) => {console.log(`Resultado: ${resultado}`)})
-// .catch((erro) => {console.log(`Deu erro: ${erro}`)})
-// console.log('A')
+//     .catch((err) => {
+//         console.log(err)
+//     })
+// calculoRapidinho(-10)
+//     .then((res) => {
+//         console.log(res)
+//     })
+//     .catch((err) => {
+//         console.log(err)
+//         console.log('-10')
+//     })
+// console.log('esperando')
 
-// const calculoRapido = (n) =>{
-//     return n > 0 ? Promise.resolve((n/2) * (n+1)) : Promise.reject("n deve ser positivo")
-// }
-// calculoRapido(1000)
-// .then(function(resultado){ console.log(`Resultado: ${resultado}`)})
-// .catch(function(erro){ console.log(`Deu erro: ${erro}`)})
 
+
+// // function calculoDemorado(numero){
+// //     return new Promise(function (resolve, reject) {
+// //         let res = 0
+// //         if (numero > 0) {
+// //             for (let i = 1; i <= numero; i++){
+// //                 res += i
+// //             }
+// //             resolve(res)
+// //         } else {
+// //             reject("numero deve ser maior que zero")
+// //         }
+// //     })
+// // }
+// // calculoDemorado(-10)
+// // .then((resultado) => {
+// //     console.log(resultado)
+// // }).catch((erro) => {
+// //     console.log(erro)
+// // })
+// // console.log(calculoDemorado(-10))
+
+// // // // callback hell
+// // // const fs = require('fs')
+// // // const abrirArquivo = function (nomeArquivo){
+// // //     const exibirConteudo = function(erro, conteudo){
+// // //         if(erro){
+// // //             console.log(`Deu erro: ${erro}`)
+// // //         } else {
+// // //             console.log(conteudo.toString())
+// // //             const dobro = conteudo.toString() * 2
+// // //             const finalizar = function(erro){
+// // //                 if(erro){
+// // //                     console.log('Deu erro tentando salvar o arquivo.', erro)
+// // //                 } else {
+// // //                     console.log('Salvou o dobro com sucesso')
+// // //                 }
+// // //             }
+// // //             fs.writeFile('dobro.txt', dobro.toString(), finalizar)
+// // //         }
+// // //     }
+// // //     fs.readFile(nomeArquivo, exibirConteudo)
+// // // }
+// // // abrirArquivo('arquivo.txt') 
+
+
+// // // // // callback
+// // // // const fs = require('fs')
+// // // // const abrirArquivo = function (nomeArquivo){
+// // // //     const exibirConteudo = function(erro, conteudo){
+// // // //         if(erro){
+// // // //             console.log(`Deu erro: ${erro}`)
+// // // //         } else {
+// // // //             console.log(conteudo.toString())
+// // // //         }
+// // // //     }
+// // // //     fs.readFile(nomeArquivo, exibirConteudo)
+// // // // }
+// // // // abrirArquivo('arquivo.txt') 
+
+// // // // function demorada(tempo){
+// // // //     console.log(`demorada ${tempo}`)
+// // // //     const atualMais2Segundos = new Date().getTime() + tempo
+// // // //     while(new Date().getTime() <= atualMais2Segundos);
+// // // //     const d = 8 + 4
+// // // //     return d
+// // // // }
+// // // // setTimeout(function(){demorada(2000)}, 2000)
+// // // // setTimeout(function(){demorada(1000)}, 1000)
+// // // // console.log('chegou o fim do script principal')
+
+// // // // // setTimeout(function(){
+// // // // //     console.log('dentro da timeout', 0)
+// // // // // })
+// // // // // const a = new Date().getTime() + 1000
+// // // // // while (new Date().getTime() <= a);
+// // // // // console.log('fora da timeout')
+
+// // // // // // // Síncrono e assíncrono
+
+// // // // // // //modelo single thread
+// // // // // // // console.log('Eu primeiro')
+// // // // // // // console.log('Agora eu')
+// // // // // // // console.log('Sempre vou ser a última')
+// // // // // // // const a = 2 + 7
+// // // // // // // const b = 5
+// // // // // // // console.log(a + b)
+
+// // // // // // function demorada(){
+// // // // // //     const atualMais2Segundos = new Date().getTime() + 2000
+// // // // // //     while(new Date().getTime() <= atualMais2Segundos);
+// // // // // //     const d = 8 + 4
+// // // // // //     return d
+// // // // // // }
+// // // // // // const a = 2 + 3
+// // // // // // const b = 5 + 9
+// // // // // // setTimeout(function(){
+// // // // // //    const d = demorada()
+// // // // // //    console.log(d) 
+// // // // // // }, 500)
+
+// // // // // // const e = 2 + a + b
+// // // // // // console.log(e)
+
+// // // // // // // //JSON de funções
+
+// // // // // // // let calculadora = {
+// // // // // // //     soma: (a, b) => a + b,
+// // // // // // //     subtracao: function (a, b) {
+// // // // // // //         return a - b
+// // // // // // //     },
+// // // // // // //     multiplicacao: (a, b) => a * b,
+// // // // // // //     divisao: (a, b) => a / b,
+// // // // // // //     potenciacao: (a, b) => a ** b,
+// // // // // // //     logaritmo: (a, b) => Math.log(a, b)
+// // // // // // // }
+// // // // // // // operacoes = ['subtracao', 'soma', 'multiplicacao', 
+// // // // // // //     'divisao', 'potenciacao', 'logaritmo']
+// // // // // // // dados = [3, 2]
+// // // // // // // for (let operacao of operacoes){
+// // // // // // //     console.log(`${operacao}: ${calculadora[operacao](...dados)}`)
+// // // // // // // }
+
+// // // // // // // // //JSON Array
+
+// // // // // // // // let concessionaria = {
+// // // // // // // //     cnpj: "00011122210001-45",
+// // // // // // // //     endereco: {
+// // // // // // // //         logradouro: "Rua A",
+// // // // // // // //         numero: 10,
+// // // // // // // //         bairro: "Vila J"
+// // // // // // // //     },
+// // // // // // // //     veiculos: [
+// // // // // // // //         {
+// // // // // // // //             marca: 'Ford',
+// // // // // // // //             modelo: 'Ecosport',
+// // // // // // // //             anoDeFabricacao: 2018
+// // // // // // // //         },
+// // // // // // // //         {
+// // // // // // // //             marca: 'Chevrolet',
+// // // // // // // //             modelo: 'Onix',
+// // // // // // // //             anoDeFabricacao: 2020
+// // // // // // // //         },
+// // // // // // // //         {
+// // // // // // // //             marca: 'Volkswagen',
+// // // // // // // //             modelo: 'Nivus',
+// // // // // // // //             anoDeFabricacao: 2020
+// // // // // // // //         }
+// // // // // // // //     ]
+// // // // // // // // }
+// // // // // // // // for(let veiculo of concessionaria.veiculos){
+// // // // // // // //     console.log(`\nMarca: ${veiculo.marca}`)
+// // // // // // // //     console.log(`Modelo: ${veiculo.modelo}`)
+// // // // // // // //     console.log(`Ano de Fabricação: ${veiculo.anoDeFabricacao}`)
+// // // // // // // // }
+
+
+// // // // // // // // // //JSON
+
+// // // // // // // // // let pessoa = {
+// // // // // // // // //     nome: 'João',
+// // // // // // // // //     idade: 17
+// // // // // // // // // }
+// // // // // // // // // // acesso pode ser feito com ponto
+// // // // // // // // // console.log("Me chamo " + pessoa.nome)
+// // // // // // // // // // acesso pode ser feito com colchetes
+// // // // // // // // // console.log("Me chamo " + pessoa['nome'])
+// // // // // // // // // //pode misturar
+// // // // // // // // // console.log(`Me chamo ${pessoa.nome} e tenho ${pessoa['idade']} anos.`)
+
+// // // // // // // // // //objetos aninhados
+
+// // // // // // // // // let pessoaComEndereco = {
+// // // // // // // // //     nome: 'Maria',
+// // // // // // // // //     idade: 21,
+// // // // // // // // //     endereco: {
+// // // // // // // // //         logradouro: "Rua B",
+// // // // // // // // //         numero: 121
+// // // // // // // // //     }
+// // // // // // // // // }
+
+// // // // // // // // // console.log(pessoaComEndereco.endereco.logradouro)
+// // // // // // // // // console.log(pessoaComEndereco['endereco'].logradouro)
+// // // // // // // // // console.log(pessoaComEndereco.endereco['logradouro'])
+// // // // // // // // // console.log(pessoaComEndereco['endereco']['logradouro'])
+
+// // // // // // // // // let campos = ['logradouro', 'numero']
+// // // // // // // // // for(let campo of campos){
+// // // // // // // // //     console.log(pessoaComEndereco.endereco[campo])
+// // // // // // // // // }
+// // // // // // // // // // // escopo interno e externo
+
+// // // // // // // // // // function f() {
+// // // // // // // // // //     let nome = 'João'
+// // // // // // // // // //     function g(){
+// // // // // // // // // //         console.log(nome)
+// // // // // // // // // //     }
+// // // // // // // // // //     g()
+// // // // // // // // // // }
+
+// // // // // // // // // // f()
+
+// // // // // // // // // // /* Uma função interna em conjunto com as variáveis de seu escopo externo
+// // // // // // // // // //    é o que chamamos de closure.
+// // // // // // // // // //    Exemplos:
+// // // // // // // // // // */
+
+// // // // // // // // // // function ola(){
+// // // // // // // // // //     let nome = 'José'
+// // // // // // // // // //     return function() {
+// // // // // // // // // //         console.log(nome)
+// // // // // // // // // //     }
+// // // // // // // // // // }
+
+// // // // // // // // // // let olaResult = ola()
+// // // // // // // // // // olaResult()
+
+// // // // // // // // // // function saudacoesFactory(saudacao, nome){
+// // // // // // // // // //     return function(){
+// // // // // // // // // //         console.log(`${saudacao}, ${nome}`)
+// // // // // // // // // //     }
+// // // // // // // // // // }
+
+// // // // // // // // // // let olaMaria = saudacoesFactory('Olá', 'Maria')
+// // // // // // // // // // let tchauMaria = saudacoesFactory('Tchau', 'Maria')
+
+// // // // // // // // // // olaMaria()
+// // // // // // // // // // tchauMaria()
+
+// // // // // // // // // // /* os efeitos do closure, porém, podem trazer resultados
+// // // // // // // // // //    pouco intuitivos
+// // // // // // // // // // */
+
+// // // // // // // // // // function eAgora(){
+// // // // // // // // // //     let cont = 1
+// // // // // // // // // //     function f1() {
+// // // // // // // // // //         console.log(cont)
+// // // // // // // // // //     }
+// // // // // // // // // //     cont++
+// // // // // // // // // //     function f2() {
+// // // // // // // // // //         console.log(cont)
+// // // // // // // // // //     }
+// // // // // // // // // //     //JSON com as duas funções
+// // // // // // // // // //     return {f1, f2}
+// // // // // // // // // // }
+
+// // // // // // // // // // let eAgoraResult = eAgora()
+// // // // // // // // // // console.log(eAgoraResult)
+
+// // // // // // // // // // eAgoraResult.f1()
+// // // // // // // // // // eAgoraResult.f2()
+
+// // // // // // // // // // // // closure
+// // // // // // // // // // // /*uma função pode ser atrubuída 
+// // // // // // // // // // //   a uma variável*/
+
+// // // // // // // // // // // let umaFuncao = function () {
+// // // // // // // // // // //     console.log('Fui armazenada em uma variável.')
+// // // // // // // // // // // }
+// // // // // // // // // // // //pode ser chamada assim
+// // // // // // // // // // // umaFuncao()
+// // // // // // // // // // // /* f é uma função que recebe outra função como 
+// // // // // // // // // // //    parâmetro e por isso é uma função de mais
+// // // // // // // // // // //    alta ordem (HOF). 
+// // // // // // // // // // //    Ela executa qualquer função sem parâmetros
+// // // // // // // // // // //    que ela receba.
+// // // // // // // // // // // */
+// // // // // // // // // // // function f(funcao){
+// // // // // // // // // // //     funcao()
+// // // // // // // // // // // }
+// // // // // // // // // // // f(umaFuncao)
+// // // // // // // // // // // f((n = 10) => console.log(3 * n))
+// // // // // // // // // // // f(function(){
+// // // // // // // // // // //     console.log('Fui criada aqui mesmo.')
+// // // // // // // // // // // })
+
+// // // // // // // // // // // /* g também é HOF pois retorna uma função */
+// // // // // // // // // // // function g() {
+// // // // // // // // // // //     function outraFuncao(){
+// // // // // // // // // // //         console.log('Fui criada por g.')
+// // // // // // // // // // //     }
+// // // // // // // // // // //     return outraFuncao
+// // // // // // // // // // // }
+
+// // // // // // // // // // // /* outras formas de executar a função outraFuncao
+// // // // // // // // // // //    definida pela funcao g */
+// // // // // // // // // // // f(g())
+// // // // // // // // // // // g()()
+// // // // // // // // // // // //f(g)() não funciona
+// // // // // // // // // // // //f(g()()) não funciona
+// // // // // // // // // // // //f(1) não funciona
+
+
+// // // // // // // // // // // // // //funções definidas pelo usuário
+
+// // // // // // // // // // // // //arrow functions
+// // // // // // // // // // // // const hello = () => console.log('Hello')
+// // // // // // // // // // // // hello()
+// // // // // // // // // // // // console.log(hello)
+// // // // // // // // // // // // console.log(hello())
+
+// // // // // // // // // // // // const dobro = (valor) => valor * 2
+// // // // // // // // // // // // console.log(dobro(10))
+
+// // // // // // // // // // // // const triplo = (valor) => {
+// // // // // // // // // // // //     return valor * 3
+// // // // // // // // // // // // }
+// // // // // // // // // // // // console.log(triplo(10))
+
+// // // // // // // // // // // // const ehPar = (n) => {
+// // // // // // // // // // // //     return n%2 === 0
+// // // // // // // // // // // // }
+// // // // // // // // // // // // console.log(ehPar(10))
+
+// // // // // // // // // // // // // //método tradicional
+// // // // // // // // // // // // // function hello() {
+// // // // // // // // // // // // //     console.log('Oi')
+// // // // // // // // // // // // // }
+// // // // // // // // // // // // // hello()
+
+// // // // // // // // // // // // // function hello(nome) {
+// // // // // // // // // // // // //     console.log('Oi, ' + nome)
+// // // // // // // // // // // // // }
+// // // // // // // // // // // // // hello('Pedro')
+
+// // // // // // // // // // // // // function soma(a , b){
+// // // // // // // // // // // // //     return a + b
+// // // // // // // // // // // // // }
+
+// // // // // // // // // // // // // console.log(soma(2, 3))
+// // // // // // // // // // // // // const res = soma('2', 3)
+// // // // // // // // // // // // // console.log(res)
+
+// // // // // // // // // // // // // //funções anônimas
+// // // // // // // // // // // // // const dobro = function(n) {
+// // // // // // // // // // // // //     return 2 * n
+// // // // // // // // // // // // // }
+// // // // // // // // // // // // // console.log(dobro(10))
+
+// // // // // // // // // // // // // //valores default (padrão)
+// // // // // // // // // // // // // const triplo = function(n = 5){
+// // // // // // // // // // // // //     return 3*n
+// // // // // // // // // // // // // }
+// // // // // // // // // // // // // console.log(triplo(10))
+// // // // // // // // // // // // // console.log(triplo())
+
+// // // // // // // // // // // // // // //funções sobre vetores
+// // // // // // // // // // // // // // const nomes = ['Ana Maria', 'Antonio', 'Rodrigo', 'Alex', 'Cristina']
+// // // // // // // // // // // // // // //filter
+// // // // // // // // // // // // // // const apenasComA = nomes.filter((n) => n.startsWith('A'))
+// // // // // // // // // // // // // // console.log(apenasComA)
+// // // // // // // // // // // // // // const lista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+// // // // // // // // // // // // // // pares = lista.filter((x) => x%2===0)
+// // // // // // // // // // // // // // console.log(pares)
+
+// // // // // // // // // // // // // // //map
+// // // // // // // // // // // // // // const iniciais = nomes.map((nome) => nome.charAt(0))
+// // // // // // // // // // // // // // console.log(iniciais)
+// // // // // // // // // // // // // // const sequencia = lista.map((x) => Math.exp(x))
+// // // // // // // // // // // // // // console.log(sequencia)
+
+// // // // // // // // // // // // // // //reduce
+// // // // // // // // // // // // // // const soma = lista.reduce((ac, v) => ac + v)
+// // // // // // // // // // // // // // console.log(soma)
+
+
+// // // // // // // // // // // // // // // //vetores
+// // // // // // // // // // // // // // // v1 = []
+// // // // // // // // // // // // // // // v1[0] = 3.4
+// // // // // // // // // // // // // // // v1[2] = 2
+// // // // // // // // // // // // // // // v1[10] = 'abc'
+// // // // // // // // // // // // // // // console.log(v1)
+// // // // // // // // // // // // // // // console.log(v1.length)
+// // // // // // // // // // // // // // // //iterando com for
+// // // // // // // // // // // // // // // for(let i = 0; i < v1.length; i++){
+// // // // // // // // // // // // // // //     console.log(v1[i])
+// // // // // // // // // // // // // // // }
+// // // // // // // // // // // // // // // //posso reatribuir, pois é variável
+// // // // // // // // // // // // // // // v1 = [3.4, 2, 'abc']
+// // // // // // // // // // // // // // // v2 = v1
+// // // // // // // // // // // // // // // console.log(v2)
+// // // // // // // // // // // // // // // console.log(v2.length)
+// // // // // // // // // // // // // // // console.log('v1 antes =',v1)
+// // // // // // // // // // // // // // // console.log('v2 antes =', v2)
+// // // // // // // // // // // // // // // v2[1] = 3
+// // // // // // // // // // // // // // // console.log('v1 depois =',v1)
+// // // // // // // // // // // // // // // console.log('v2 depois =', v2)
+// // // // // // // // // // // // // // // ///iterando com for-each
+// // // // // // // // // // // // // // // for(indice in v2){
+// // // // // // // // // // // // // // //     console.log(v2[indice])
+// // // // // // // // // // // // // // // }
+// // // // // // // // // // // // // // // //iterando com for-of
+// // // // // // // // // // // // // // // for(valor of v2){
+// // // // // // // // // // // // // // //     console.log(valor)
+// // // // // // // // // // // // // // // }
+// // // // // // // // // // // // // // // //vetor constante
+// // // // // // // // // // // // // // // const v3 = []
+// // // // // // // // // // // // // // // v3[0] = 'a'
+// // // // // // // // // // // // // // // v3[2] = 1
+// // // // // // // // // // // // // // // //v3 = ['a', 1] dá erro
+// // // // // // // // // // // // // // // console.log(v3)
+// // // // // // // // // // // // // // // console.log(v3.length)
+// // // // // // // // // // // // // // // const v4 = [0, 1.2, 'j']
+// // // // // // // // // // // // // // // console.log(v4)
+// // // // // // // // // // // // // // // console.log(v4.length)
+// // // // // // // // // // // // // // // // //comparação
+// // // // // // // // // // // // // // // // console.log(1, 1 == 1)//true
+// // // // // // // // // // // // // // // // console.log(2, 1 == '1')//true
+// // // // // // // // // // // // // // // // console.log(3, 1 === '1')//false
+
+// // // // // // // // // // // // // // // // console.log(4, true == 1)
+// // // // // // // // // // // // // // // // console.log(5, true == '1')
+// // // // // // // // // // // // // // // // console.log(6, true === 1)
+// // // // // // // // // // // // // // // // //
+// // // // // // // // // // // // // // // // console.log(7, 0 == false)
+// // // // // // // // // // // // // // // // console.log(8, 2 == false)
+// // // // // // // // // // // // // // // // console.log(9, -3.1415 == false)
+
+// // // // // // // // // // // // // // // // console.log(10, 2 == true)
+// // // // // // // // // // // // // // // // console.log(11, -3.1415 == true)
+
+// // // // // // // // // // // // // // // // console.log(12, 1 == [1])
+// // // // // // // // // // // // // // // // console.log(13, null == null)
+// // // // // // // // // // // // // // // // console.log(14, null == undefined)
+// // // // // // // // // // // // // // // // console.log(15, [] == false)
+// // // // // // // // // // // // // // // // console.log(16, [] == [])
+
+// // // // // // // // // // // // // // // // // //coerção
+// // // // // // // // // // // // // // // // // const n1 = 2
+// // // // // // // // // // // // // // // // // const n2 = '3'
+// // // // // // // // // // // // // // // // // //coerção implícita
+// // // // // // // // // // // // // // // // // const n3 = n1 + n2
+// // // // // // // // // // // // // // // // // console.log(n3)
+// // // // // // // // // // // // // // // // // //coerção explícita
+// // // // // // // // // // // // // // // // // const n4 = n1 + Number(n2)
+// // // // // // // // // // // // // // // // // console.log(n4)
+
+// // // // // // // // // // // // // // // // // console.log(n1 + Number(n2))
+
+
+// // // // // // // // // // // // // // // // // // //declaração de constantes  
+// // // // // // // // // // // // // // // // // // const nome = "José"
+// // // // // // // // // // // // // // // // // // const idade = 27
+// // // // // // // // // // // // // // // // // // console.log(nome, idade)
+
+// // // // // // // // // // // // // // // // // // const sexo = "M"
+// // // // // // // // // // // // // // // // // // const endereco = 'Rua K, 12'
+// // // // // // // // // // // // // // // // // // const endereco2 = "Rua Olho D'Água, 12"
+// // // // // // // // // // // // // // // // // // const citacao = '"Ser ou não ser..."'
+// // // // // // // // // // // // // // // // // // console.log(sexo, endereco, endereco2, citacao)
+
+// // // // // // // // // // // // // // // // // // //declaração de variáveis
+// // // // // // // // // // // // // // // // // // //let: variável local com escopo de bloco
+// // // // // // // // // // // // // // // // // // let a = 2
+// // // // // // // // // // // // // // // // // // let b = 'abc'
+// // // // // // // // // // // // // // // // // // console.log(a,b)
+// // // // // // // // // // // // // // // // // // b = 3
+// // // // // // // // // // // // // // // // // // console.log(a,b)
+// // // // // // // // // // // // // // // // // // /* variável global com escopo na função em que 
+// // // // // // // // // // // // // // // // // //    foi criada ou no script todo */
+// // // // // // // // // // // // // // // // // // var c = 2 + 3
+// // // // // // // // // // // // // // // // // // var d = "abcd"
+// // // // // // // // // // // // // // // // // // console.log(c, d)
+// // // // // // // // // // // // // // // // // // console.log('nome3:', nome3)
+// // // // // // // // // // // // // // // // // // let idade2 = 18
+// // // // // // // // // // // // // // // // // // if (idade2 >= 18){
+// // // // // // // // // // // // // // // // // //     let nome2 = "João"
+// // // // // // // // // // // // // // // // // //     var nome3 = "Maria"
+// // // // // // // // // // // // // // // // // //     console.log('nome2:', nome2)
+// // // // // // // // // // // // // // // // // // }
+// // // // // // // // // // // // // // // // // // //console.log('nome2:', nome2)
+// // // // // // // // // // // // // // // // // // console.log('nome3:', nome3)
+
+// // // // // // // // // // // // // // // // // // var linguagem = 'Javascript'
+// // // // // // // // // // // // // // // // // // //concatenação
+// // // // // // // // // // // // // // // // // // console.log('Aprendendo ' + linguagem)
+// // // // // // // // // // // // // // // // // // //interpolação
+// // // // // // // // // // // // // // // // // // let linguagem2 = 'Java'
+// // // // // // // // // // // // // // // // // // console.log(`Já aprendi ${linguagem2} anteriormente.)

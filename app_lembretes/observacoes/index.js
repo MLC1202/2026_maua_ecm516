@@ -8,13 +8,13 @@ const observacoesPorLembreteId = {}
 
 const funcoes = {
     ObservacaoClassificada: (observacao) => {
-        const observacoes = 
-            observacoesPorLembreteId[observacao.lembreteId]
+        const observacoes =
+        observacoesPorLembreteId[observacao.lembreteId]
         const obsParaAtualizar = 
             observacoes.find(o => o.id === observacao.id)
         obsParaAtualizar.status = observacao.status
-        axios.post ('http://localhost:10000/eventos', {
-            tipo: 'ObservacaoAtualizada',
+        axios.post("http://localhost:10000/eventos", {
+            tipo: "ObservacaoAtualizada",
             dados: {
                 id: observacao.id,
                 texto: observacao.texto,
@@ -22,8 +22,9 @@ const funcoes = {
                 status: observacao.status
             }
         })
-    } 
+    }
 }
+
 
 //:id é um placeholder
 //exemplo: /lembretes/12/observacoes
@@ -37,7 +38,7 @@ app.post('/lembretes/:id/observacoes', async (req, res) => {
     const id = req.params.id
 
     const observacoesDoLembrete = observacoesPorLembreteId[id] || []
-    observacoesDoLembrete.push({ id: idObs, texto, status: "aguardando"})
+    observacoesDoLembrete.push({ id: idObs, texto, status: 'aguardando'})
     observacoesPorLembreteId[id] = observacoesDoLembrete
     await axios.post('http://localhost:10000/eventos', {
         tipo: 'ObservacaoCriada',
@@ -45,7 +46,7 @@ app.post('/lembretes/:id/observacoes', async (req, res) => {
             id: idObs, 
             texto, 
             lembreteId: id,
-            status: "aguardando"
+            status: 'aguardando'
         }
     })
     res.status(201).send(observacoesDoLembrete)
@@ -54,7 +55,7 @@ app.post('/lembretes/:id/observacoes', async (req, res) => {
 app.post('/eventos', (req, res) => {
     try{
         funcoes[req.body.tipo](req.body.dados)
-    } catch (err) {}
+    } catch(err){}
     res.status(200).send({msg: 'ok'})
 })
 
